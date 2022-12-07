@@ -29,83 +29,137 @@ icon.addEventListener("click", () => {
   sideBar.classList.add("show__sidebar");
 });
 
-const shoppingIcon = document.querySelectorAll(".shopping__icon");
-
 // added the onclick for add to  cart
+const shop = document.querySelector(".products__container");
+// console.log("🚀 ~ file: main.js:33 ~ shoppingIcon", shoppingIcon);
 
 window.addEventListener("DOMContentLoaded", () => {
-  shoppingIcon.forEach((icon) => {
-    icon.addEventListener("click", (e) => {
-      if (e.target.classList.contains("shopping__icon")) {
-        sideBar.classList.add("show__sidebar");
-        addToCart(e.target);
-      }
-    });
-  });
-
-  function addToCart(target) {
-    // console.log(target.parentElement.parentElement);
-
-    const price = target.parentElement
-      .querySelector(".product__price")
-      .innerHTML.split(" ")[1];
-    const name =
-      target.parentElement.parentElement.querySelector(
-        ".product__name"
-      ).innerHTML;
-
-    const src = target.parentElement.parentElement.querySelector(
-      ".product__main__image"
-    ).src;
-
-    const container = document.createElement("article");
-    container.className = "cart__card";
-    //   console.log(container);
-    container.innerHTML = ` 
-              <img
-                src="${src}"
-                alt="product 1"
-                class="product__image"
-              />
-              <div class="cart__content">
-                <h2 class="cart__name">${name}</h2>
-                <h3 class="cart__price">${price}</h3>
-                <input
-                  type="number"
-                  name="number"
-                  id="number"
-                  class="cart__number"
-                  value="1"
-                />
-              </div>
-              <button class="btn btn--delete">
-                <i class="fa-solid fa-trash"></i>
-              </button>`;
-
-    const containerCart = getElement(".cart__container");
-    containerCart.appendChild(container);
-
-    containerCart.addEventListener("click", (e) => {
-      console.log(e.target.parentElement);
-      const cardElement = e.target.parentElement.parentElement;
-
-      const quantity =
-        e.target.parentElement.querySelector(".cart__number").value;
-      let total = 0;
-
-      // console.log(quantity);
-      if (e.target.parentElement.classList.contains("btn--delete")) {
-        cardElement.remove();
-      }
-      totalAmount(price, quantity, total);
-    });
-  }
+  displayShop();
+  increment();
+  decrement();
 });
 
-function totalAmount(price, quantity, total) {
-  total += price * quantity;
+const shopData = [
+  { id: 1, name: "a", image: "/images/product1.jpg", price: 3802 },
+  { id: 2, name: "b", image: "/images/product2.jpg", price: 380 },
+  { id: 3, name: "c", image: "/images/product3.jpg", price: 382 },
+  { id: 4, name: "d", image: "/images/product4.jpg", price: 302 },
+  { id: 5, name: "e", image: "/images/product5.jpg", price: 302 },
+  { id: 6, name: "f", image: "/images/product6.jpg", price: 202 },
+  { id: 7, name: "g", image: "/images/product7.jpg", price: 102 },
+  { id: 8, name: "h", image: "/images/product8.jpg", price: 502 },
+];
 
-  const totalPrice = document.querySelector(".total");
+displayShop();
+let cart = getLocalStorage("cart") || [];
 
-  totalPrice.innerHTML = total;
+const displayShop = () => {
+  shop.innerHTML = shopData
+    .map((data) => {
+      const { name, image, price, id } = data;
+
+      const search = cart.find((e) => e.id === id) || [];
+
+      return `<article class="product__main__card">
+          <img
+            src="${image}"
+            alt="product 1"
+            class="product__main__image"
+          />
+          <h2 class="product__name">${name}</h2>
+          <div class="product__footer">
+            <span class="product__price">₹ ${price}</span>
+            <div class="cart__quantity">
+              <i class="fa-solid fa-plus plus  increment"   ></i>
+              <div class="quantity"  id=${id} >${
+        search.item === undefined ? 0 : search.item
+      }</div>
+              <i class="fa-solid fa-minus minus  decrement"></i>
+            </div>
+          </div>
+        </article>`;
+    })
+    .join(" ");
+};
+
+function getLocalStorage(item) {
+  const data = localStorage.getItem(item);
+  if (data) {
+    return JSON.parse(localStorage.getItem(item));
+  }
+  return [];
+}
+
+const increment = () => {
+  document.querySelectorAll(".increment").forEach((ele) => {
+    ele.addEventListener("click", (e) => {
+      // console.log("inc");
+      // console.log(e.target.nextSibling.nextSibling.id);
+      const id = e.target.nextSibling.nextSibling.id;
+
+      const search = cart.find((item) => item.id === id);
+      // console.log(
+      //   "🚀 ~ file: main.js:88 ~ ele.addEventListener ~ search",
+      //   search
+      // );
+
+      if (search === undefined) {
+        cart.push({
+          id: id,
+          item: 1,
+        });
+      } else {
+        search.item += 1;
+      }
+      update(id);
+
+      // console.log(cart);
+      // console.log(search);
+    });
+  });
+};
+
+const decrement = () => {
+  document.querySelectorAll(".decrement").forEach((ele) => {
+    ele.addEventListener("click", (e) => {
+      // console.log(e.target.previousSibling.previousSibling.id);
+
+      const id = e.target.previousSibling.previousSibling.id;
+      const search = cart.find((item) => item.id === id);
+      // console.log(
+      //   "🚀 ~ file: main.js:88 ~ ele.addEventListener ~ search",
+      //   search
+      // );
+
+      if (search.item === 0) {
+        return;
+      } else {
+        search.item -= 1;
+      }
+
+      // console.log(cart);
+      // console.log(search);
+      update(id);
+    });
+  });
+};
+const update = (id) => {
+  const searchId = cart.find((ele) => ele.id === id);
+
+  // console.log("🚀 ~ file: main.js:135 ~ update ~ searchId", searchId.item);
+  document.getElementById(id).innerHTML = searchId.item;
+  // console.log("update", id);
+
+  calculate();
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
+
+function calculate() {
+  const total = document.querySelector(".total__cart__quantity");
+  total.innerHTML = cart
+    .map((e) => e.item)
+    .reduce((acc, curr) => acc + curr, 0);
+  // console.log("🚀 ~ file: main.js:152 ~ calculate ~ totalItems", totalItems);
+
+  // total.innerHTML =
 }

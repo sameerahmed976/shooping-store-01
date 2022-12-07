@@ -266,6 +266,19 @@ p {
   padding-left: 1rem;
 }
 
+.cart__quantity {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  background-color: whitesmoke;
+}
+
+.plus,
+.minus {
+  cursor: pointer;
+}
+
 .cart__price {
   padding-left: 1rem;
   text-transform: capitalize;

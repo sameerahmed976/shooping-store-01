@@ -18,7 +18,7 @@
   <body>
     <header class="header">
       <nav class="navbar">
-        <a href="#" class="logo"><h1 class="logo__text">E-Commerce</h1></a>
+        <a href="/" class="logo"><h1 class="logo__text">E-Commerce</h1></a>
         <div class="shopping__bag">
           <i class="fa-solid fa-bag-shopping bag__icon icon"></i>
           <span class="total__cart__quantity">0</span>
@@ -30,29 +30,50 @@
           <h2 class="sidebar__heading">Your cart</h2>
           <span class="close">&times;</span>
           <section class="cart__container">
-            <!-- <article class="cart__card">
+            <article class="cart__card">
               <img
                 src="images/product1.jpg"
                 alt="product 1"
-                class="product__main__image"
+                class="product__cart__image"
               />
               <div class="cart__content">
                 <h2 class="cart__name">Name</h2>
-                <h3 class="cart__price">price</h3>
+                <h3 class="cart__price">₹ 7000</h3>
                 <input
                   type="number"
                   name="number"
                   id="number"
+                  class="cart__number"
+                  value="1"
+                />
+              </div>
+              <button class="btn btn--delete">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </article>
+            <article class="cart__card">
+              <img
+                src="images/product1.jpg"
+                alt="product 1"
+                class="product__cart__image"
+              />
+              <div class="cart__content">
+                <h2 class="cart__name">Name</h2>
+                <h3 class="cart__price">₹ 6000</h3>
+                <input
+                  type="number"
+                  name="number"
+                  id="number"
+                  value="1"
                   class="cart__number"
                 />
               </div>
               <button class="btn btn--delete">
                 <i class="fa-solid fa-trash"></i>
               </button>
-            </article> -->
+            </article>
           </section>
         </section>
-        <hr />
         <p class="cart__total">Total ₹ <span class="total">0</span></p>
         <button class="btn btn--buy">Buy now</button>
       </aside>
@@ -63,7 +84,21 @@
         <div class="underline__products"></div>
       </section>
       <section class="products__container">
-        <!-- <article class="product__main__card">
+        <article class="product__main__card">
+          <img
+            src="images/product1.jpg"
+            alt="product 1"
+            class="product__main__image"
+          />
+          <h2 class="product__name">Aeroready Shirt</h2>
+          <div class="product__footer">
+            <span class="product__price">₹ 2500</span>
+            <div class="add__to__cart">
+              <i class="fa-solid fa-bag-shopping add__tocart__icon icon"></i>
+            </div>
+          </div>
+        </article>
+        <article class="product__main__card">
           <img
             src="images/product2.jpg"
             alt="product 1"
@@ -72,15 +107,97 @@
           <h2 class="product__name">Wireless EarBuds</h2>
           <div class="product__footer">
             <span class="product__price">₹ 5500</span>
-            <div class="cart__quantity">
-              <i class="fa-solid fa-plus plus"></i>
-              <div class="quantity">0</div>
-              <i class="fa-solid fa-minus minus"></i>
+            <div class="add__to__cart">
+              <i class="fa-solid fa-bag-shopping add__tocart__icon icon"></i>
             </div>
           </div>
-        </article> -->
+        </article>
+        <article class="product__main__card">
+          <img
+            src="images/product3.jpg"
+            alt="product 1"
+            class="product__main__image"
+          />
+          <h2 class="product__name">Hooded parka</h2>
+          <div class="product__footer">
+            <span class="product__price">₹ 4500</span>
+            <div class="add__to__cart">
+              <i class="fa-solid fa-bag-shopping add__tocart__icon icon"></i>
+            </div>
+          </div>
+        </article>
+        <article class="product__main__card">
+          <img
+            src="images/product4.jpg"
+            alt="product 1"
+            class="product__main__image"
+          />
+          <h2 class="product__name">Straw Metal Bottle</h2>
+          <div class="product__footer">
+            <span class="product__price">₹ 2400</span>
+            <div class="add__to__cart">
+              <i class="fa-solid fa-bag-shopping add__tocart__icon icon"></i>
+            </div>
+          </div>
+        </article>
+        <article class="product__main__card">
+          <img
+            src="images/product5.jpg"
+            alt="product 1"
+            class="product__main__image"
+          />
+          <h2 class="product__name">Metal Sunglasses</h2>
+          <div class="product__footer">
+            <span class="product__price">₹ 5000</span>
+            <div class="add__to__cart">
+              <i class="fa-solid fa-bag-shopping add__tocart__icon icon"></i>
+            </div>
+          </div>
+        </article>
+        <article class="product__main__card">
+          <img
+            src="images/product6.jpg"
+            alt="product 1"
+            class="product__main__image"
+          />
+          <h2 class="product__name">Black Hat</h2>
+          <div class="product__footer">
+            <span class="product__price">₹ 6000</span>
+            <div class="add__to__cart">
+              <i class="fa-solid fa-bag-shopping add__tocart__icon icon"></i>
+            </div>
+          </div>
+        </article>
+        <article class="product__main__card">
+          <img
+            src="images/product7.jpg"
+            alt="product 1"
+            class="product__main__image"
+          />
+          <h2 class="product__name">Backpack</h2>
+          <div class="product__footer">
+            <span class="product__price">₹ 7000</span>
+            <div class="add__to__cart">
+              <i class="fa-solid fa-bag-shopping add__tocart__icon icon"></i>
+            </div>
+          </div>
+        </article>
+        <article class="product__main__card">
+          <img
+            src="images/product8.jpg"
+            alt="product 1"
+            class="product__main__image"
+          />
+          <h2 class="product__name">UltraBoost 22</h2>
+          <div class="product__footer">
+            <span class="product__price">₹ 7000</span>
+            <div class="add__to__cart">
+              <i class="fa-solid fa-bag-shopping add__tocart__icon icon"></i>
+            </div>
+          </div>
+        </article>
       </section>
     </main>
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="/main.js" defer></script>
   </body>
 </html>
